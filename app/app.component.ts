@@ -30,18 +30,20 @@ const HEROES: Hero[] = [
         <span class="badge">{{hero.id}}</span> {{hero.name}}
       </li>
     </ul>
+    
     <div *ngIf="selectedHero">
       <h2>{{selectedHero.name}} details!</h2>
       <div><label>id: </label>{{selectedHero.id}}</div>
       <div>
         <label>name: </label>
         <input [(ngModel)]="selectedHero.name" placeholder="name"/>
+        <button (click)="clearHero()">no hero</button>
       </div>
     </div>
   `,
   styles: [`
     .selected {
-      background-color: #CFD8DC !important;
+      background-color: #CFD8ff !important;
       color: white;
     }
     .heroes {
@@ -61,13 +63,13 @@ const HEROES: Hero[] = [
       border-radius: 4px;
     }
     .heroes li.selected:hover {
-      background-color: #BBD8DC !important;
-      color: white;
+      background-color: #ffD8DC !important;
+      color: red;
     }
     .heroes li:hover {
       color: #607D8B;
-      background-color: #DDD;
-      left: .1em;
+      background-color: #aa9988;
+      left: 10px;
     }
     .heroes .text {
       position: relative;
@@ -78,7 +80,7 @@ const HEROES: Hero[] = [
       font-size: small;
       color: white;
       padding: 0.8em 0.7em 0 0.7em;
-      background-color: #607D8B;
+      background-color: #ff7D8B;
       line-height: 1em;
       position: relative;
       left: -1px;
@@ -95,6 +97,8 @@ export class AppComponent {
   selectedHero: Hero;
 
   onSelect(hero: Hero) { this.selectedHero = hero; }
+  clearHero() { this.selectedHero = null; }
+  
 }
 
 
