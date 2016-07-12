@@ -1,10 +1,6 @@
 import { Component } from '@angular/core';
-
-export class Hero {
-  id: number;
-  name: string;
-}
-
+import { Hero } from './hero';
+import { HeroDetailComponent } from './hero-detail.component';
 const HEROES: Hero[] = [
   { id: 11, name: 'Mr. Nice' },
   { id: 12, name: 'Narco' },
@@ -17,7 +13,6 @@ const HEROES: Hero[] = [
   { id: 19, name: 'Magma' },
   { id: 20, name: 'Tornado' }
 ];
-
 @Component({
   selector: 'my-app',
   template: `
@@ -30,20 +25,11 @@ const HEROES: Hero[] = [
         <span class="badge">{{hero.id}}</span> {{hero.name}}
       </li>
     </ul>
-    
-    <div *ngIf="selectedHero">
-      <h2>{{selectedHero.name}} details!</h2>
-      <div><label>id: </label>{{selectedHero.id}}</div>
-      <div>
-        <label>name: </label>
-        <input [(ngModel)]="selectedHero.name" placeholder="name"/>
-        <button (click)="clearHero()">no hero</button>
-      </div>
-    </div>
+    <my-hero-detail [hero]="selectedHero"></my-hero-detail>
   `,
   styles: [`
     .selected {
-      background-color: #CFD8ff !important;
+      background-color: #CFD8DC !important;
       color: white;
     }
     .heroes {
@@ -63,13 +49,13 @@ const HEROES: Hero[] = [
       border-radius: 4px;
     }
     .heroes li.selected:hover {
-      background-color: #ffD8DC !important;
-      color: red;
+      background-color: #BBD8DC !important;
+      color: white;
     }
     .heroes li:hover {
       color: #607D8B;
-      background-color: #aa9988;
-      left: 10px;
+      background-color: #DDD;
+      left: .1em;
     }
     .heroes .text {
       position: relative;
@@ -80,7 +66,7 @@ const HEROES: Hero[] = [
       font-size: small;
       color: white;
       padding: 0.8em 0.7em 0 0.7em;
-      background-color: #ff7D8B;
+      background-color: #607D8B;
       line-height: 1em;
       position: relative;
       left: -1px;
@@ -89,21 +75,12 @@ const HEROES: Hero[] = [
       margin-right: .8em;
       border-radius: 4px 0 0 4px;
     }
-  `]
+  `],
+  directives: [HeroDetailComponent]
 })
 export class AppComponent {
   title = 'Tour of Heroes';
   heroes = HEROES;
   selectedHero: Hero;
-
   onSelect(hero: Hero) { this.selectedHero = hero; }
-  clearHero() { this.selectedHero = null; }
-  
 }
-
-
-/*
-Copyright 2016 Google Inc. All Rights Reserved.
-Use of this source code is governed by an MIT-style license that
-can be found in the LICENSE file at http://angular.io/license
-*/
